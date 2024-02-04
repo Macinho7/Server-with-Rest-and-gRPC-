@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package auth;
+
+service CompradosService {
+    rpc CreateOneCompra (CreateOneCompraDTO) returns (Comprador) {};
+    rpc FindAllCompra (Empty) returns (Compradores) {};
+    rpc FindOneCompra (FindOneCompraDTO) returns (Comprador) {};
+    rpc UpdateOneCompra (UpdateCompraDTO) returns (Comprador) {};
+    rpc DeleteOneCompra (FindOneCompraDTO) returns (Comprador) {};
+    rpc QueryComprador (stream PaginacaoDto) returns (stream Compradores) {};
+}
+message PaginacaoDto {
+    int32 page = 1;
+    int32 skip = 2;
+}
+
+message UpdateCompraDTO {
+    string id = 1;
+    string pessoa = 2; 
+    string idade = 3; 
+    string empresa = 4; 
+    string cidade = 5;
+    string senha = 6;
+    DadosCompra dadosCompra = 7; 
+}
+message FindOneCompraDTO {
+    string id = 1;
+}
+
+message Empty {};
+
+message Compradores {
+    repeated Comprador compradores = 1;
+}
+
+message CreateOneCompraDTO {
+    string pessoa = 1; 
+    string idade = 2; 
+    string empresa = 3; 
+    string cidade = 4;
+    string senha = 5;
+    DadosCompra dadosCompra = 6;
+}
+message Comprador {
+    string id = 1;
+    string pessoa = 2; 
+    string idade = 3; 
+    string empresa = 4; 
+    string cidade = 5; 
+    string senha = 6;
+    DadosCompra dadosCompra = 7;
+}
+message DadosCompra {
+    optional string valor = 1;
+    optional string moeda = 2;
+    optional string bancoUsado = 3;
+}
