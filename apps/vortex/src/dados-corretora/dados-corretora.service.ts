@@ -25,7 +25,7 @@ export class DadosCorretoraService {
   private async verificaDadoCriado(id: string){
     const dadosId = await this.corretoraRepository.findOneBy({id})
     if(dadosId.dados && dadosId.dados.length > 0 ){
-      throw new Error('Dados para essa corretora ja existe')
+      throw new BadRequestException('Dados para corretora: ${id} ja existe')
     }
     return dadosId
   }
